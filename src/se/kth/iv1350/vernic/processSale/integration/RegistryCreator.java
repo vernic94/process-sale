@@ -1,4 +1,4 @@
-package main.processSale.integration;
+package se.kth.iv1350.vernic.processSale.integration;
 
 /**
  * instantiates ItemRegistry, AccountingSystem and InventorySystem

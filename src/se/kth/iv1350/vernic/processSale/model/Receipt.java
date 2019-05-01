@@ -1,4 +1,4 @@
-package main.processSale.model;
+package se.kth.iv1350.vernic.processSale.model;
 
 /**
  * presents data from Sale

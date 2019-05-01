@@ -1,6 +1,6 @@
-package main.processSale.model;
+package se.kth.iv1350.vernic.processSale.model;
 
-import main.processSale.integration.ItemDTO;
+import se.kth.iv1350.vernic.processSale.integration.ItemDTO;
 
 import java.util.ArrayList;
 

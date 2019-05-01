@@ -1,8 +1,8 @@
-package main.processSale.startup;
+package se.kth.iv1350.vernic.processSale.startup;
 
-import main.processSale.controller.Controller;
-import main.processSale.integration.RegistryCreator;
-import main.processSale.view.View;
+import se.kth.iv1350.vernic.processSale.controller.Controller;
+import se.kth.iv1350.vernic.processSale.integration.RegistryCreator;
+import se.kth.iv1350.vernic.processSale.view.View;
 
 /**
  * contains <code> main </code> method that performs application <code>ProcessSale</code> startup

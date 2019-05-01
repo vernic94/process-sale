@@ -1,8 +1,8 @@
-package main.processSale.controller;
+package se.kth.iv1350.vernic.processSale.controller;
 
-import main.processSale.integration.*;
-import main.processSale.model.Receipt;
-import main.processSale.model.Sale;
+import se.kth.iv1350.vernic.processSale.model.Receipt;
+import se.kth.iv1350.vernic.processSale.model.Sale;
+import se.kth.iv1350.vernic.processSale.integration.*;
 
 
 public class Controller {

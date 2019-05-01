@@ -1,6 +1,6 @@
-package main.processSale.view;
+package se.kth.iv1350.vernic.processSale.view;
 
-import main.processSale.controller.Controller;
+import se.kth.iv1350.vernic.processSale.controller.Controller;
 
 import java.util.Scanner;
 

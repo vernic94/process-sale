@@ -40,12 +40,22 @@ public class Controller {
         return this.itemRegistry.checkIfValid(itemId);
     }
 
-    public void addItem(String itemID){
+    /**
+     * adds items to the current sale
+     * @param itemID the items identifier
+     * @return itemDTO
+     */
+    public ItemDTO addItem(String itemID){
        ItemDTO itemDTO = this.itemRegistry.getItem(itemID);
-       System.out.println(itemDTO.toString());
        this.currentSale.addItem(itemDTO);
+       return itemDTO;
     }
 
+    /**
+     * Checks if the sale is concluded or not
+     * @param paidAmount the amount paid by the customer
+     * @return true if the sale is concluded, false otherwise
+     */
     public boolean concludeSale(double paidAmount) {
           boolean isSaleConcluded = this.currentSale.concludeSale(paidAmount);
           if (isSaleConcluded) {
@@ -55,12 +65,19 @@ public class Controller {
           return isSaleConcluded;
     }
 
+    /**
+     * prints the receipt with the sale information
+     */
     public void printReceipt(){
         Receipt receipt = new Receipt(this.currentSale);
         Printer printer = new Printer();
         printer.print(receipt.createReceiptString());
     }
 
+    /**
+     * gets the totalprice of the current sale inc TAX
+     * @return the total price of the current sale
+     */
     public double getCurrentTotalPrice(){
 
         return this.currentSale.getTotalPriceIncTax();

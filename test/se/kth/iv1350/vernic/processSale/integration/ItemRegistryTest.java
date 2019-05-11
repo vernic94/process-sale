@@ -12,7 +12,12 @@ public class ItemRegistryTest {
      * hard coded item identifier 1000 exists in the
      * itemRegistry while 10 doesn't
      */
+
     @Test
+    /**
+     * tests if the checkIfValid method returns true when an item really exists
+     * and false if it doesn't(if it has an invalid identifier)
+     */
     public void checkIfValid() {
 
         ItemRegistry itemRegistry = new ItemRegistry();
@@ -22,6 +27,10 @@ public class ItemRegistryTest {
     }
 
     @Test
+    /**
+     * checks if the getItem method returns null if there's a wrong identifier(no such item)
+     * or if it returns null if the item does exists
+     */
     public void getItem() {
 
         ItemRegistry itemRegistry = new ItemRegistry();

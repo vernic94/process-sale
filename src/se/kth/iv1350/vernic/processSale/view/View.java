@@ -1,6 +1,7 @@
 package se.kth.iv1350.vernic.processSale.view;
 
 import se.kth.iv1350.vernic.processSale.controller.Controller;
+import se.kth.iv1350.vernic.processSale.integration.ItemDTO;
 
 import java.util.Scanner;
 
@@ -11,7 +12,6 @@ public class View {
 
     /**
      * creates new instance
-     *
      * @param contr Controller that is used for all operations
      */
     public View(Controller contr) {
@@ -36,7 +36,8 @@ public class View {
             if (!validItemId)
                 System.out.println("no such item. Please insert a valid item ID");
             else {
-                this.contr.addItem(id);
+                ItemDTO itemDTO = this.contr.addItem(id);
+                System.out.println(itemDTO.toString());
                 isProcessing = this.checkIfSalesIsDone();
             }
         }

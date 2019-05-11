@@ -6,6 +6,9 @@ public class AccountingSystem {
      */
     public AccountingSystem(){}
 
+    /**
+     * Updates the accounting system after a sale is done
+     */
     public void addSale(){
         System.out.println("Accounting system updated\n");
     }

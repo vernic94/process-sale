@@ -23,6 +23,10 @@ public class ItemDTO {
         this.description = description;
     }
 
+    /**
+     * creates a string with all the info about the item
+     * @return string with all the item info
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         if (this.itemIdentifier == null){
@@ -35,14 +39,28 @@ public class ItemDTO {
         return sb.toString();
     }
 
+    /**
+     * gets the items identifier
+     * @return itemIdentifier
+     */
+
     public String getItemIdentifier() {
         return itemIdentifier;
     }
+
+    /**
+     * gets the price of the item
+     * @return itemPrice
+     */
 
     public double getPrice(){
         return this.price;
     }
 
+    /**
+     * gets item description
+     * @return item description
+     */
     public String getDescription(){
         return description;
     }

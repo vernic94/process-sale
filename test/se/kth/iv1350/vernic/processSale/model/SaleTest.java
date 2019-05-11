@@ -8,6 +8,9 @@ import static org.junit.Assert.*;
 public class SaleTest {
 
     @Test
+    /**
+     * checks that the items are added correctly to the sale and the price is calculated correctly
+     */
     public void addItem() {
       Sale sale = new Sale();
       ItemDTO item1 = new ItemDTO(0.05, "1000", "milk", 10.5);
@@ -19,6 +22,10 @@ public class SaleTest {
     }
 
     @Test
+    /**
+     * checks that the change is calculated correctly if there should be any,
+     * otherwise that the sale is not concluded
+     */
     public void concludeSale() {
         Sale sale = new Sale();
         ItemDTO item1 = new ItemDTO(0.05, "1000", "milk", 10.5);

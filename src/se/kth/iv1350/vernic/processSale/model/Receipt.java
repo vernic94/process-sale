@@ -15,7 +15,7 @@ public class Receipt extends Sale{
     }
 
     /**
-     * converts to String
+     * converts receipt info to String
      */
     public String createReceiptString() {
         StringBuilder sb = new StringBuilder();

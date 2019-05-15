@@ -1,40 +1,44 @@
 package se.kth.iv1350.vernic.processSale.integration;
 
 import org.junit.Test;
-import se.kth.iv1350.vernic.processSale.model.Sale;
+import se.kth.iv1350.vernic.processSale.controller.ItemCouldNotBeAddedException;
+
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
+/**
+ * Test for the methods and exceptions thrown in the itemRegistry class
+ * Both these test are based on the fact that the
+ * hard coded item identifier 1000 exists in the
+ * itemRegistry while 10 doesn't
+ */
 public class ItemRegistryTest {
-
     /**
-     * Both these test are based on the fact that the
-     * hard coded item identifier 1000 exists in the
-     * itemRegistry while 10 doesn't
+     * Checks that exceptions are not thrown for valid item identifier
      */
-
     @Test
-    /**
-     * tests if the checkIfValid method returns true when an item really exists
-     * and false if it doesn't(if it has an invalid identifier)
-     */
-    public void checkIfValid() {
-
+    public void getExistingItem() {
         ItemRegistry itemRegistry = new ItemRegistry();
-        assertEquals(itemRegistry.checkIfValid("10"), false);
-        assertEquals(itemRegistry.checkIfValid("1000"), true);
-
+        try{
+            itemRegistry.getItem("1002");
+            //assertEquals(itemRegistry.getItem("10"), null);
+        } catch(DatabaseFailureException | ItemNotFoundException e) {
+            fail("exception should not occur for a valid item");
+        }
     }
-
-    @Test
-    /**
-     * checks if the getItem method returns null if there's a wrong identifier(no such item)
-     * or if it returns null if the item does exists
-     */
-    public void getItem() {
-
+/**
+ * Tests that the right exception is thrown
+ */
+    @Test(expected = ItemNotFoundException.class)
+    public void getNonExistingItem() throws ItemNotFoundException {
         ItemRegistry itemRegistry = new ItemRegistry();
-        assertEquals(itemRegistry.getItem("10"), null);
-        assertNotEquals(itemRegistry.getItem("1000"), null);
+        try{
+            itemRegistry.getItem("10");
+            fail("Could add a non-existing item.");
+        }catch(DatabaseFailureException ex){
+            assertTrue("Wrong exception message, does not contain specified item: "
+                    + ex.getMessage(), ex.getMessage().contains(itemRegistry.getItem("10!").toString()));
+        }
     }
 }

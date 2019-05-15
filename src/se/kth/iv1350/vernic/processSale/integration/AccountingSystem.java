@@ -1,5 +1,8 @@
 package se.kth.iv1350.vernic.processSale.integration;
 
+/**
+ * placeholder for the stores actual accounting system
+ */
 public class AccountingSystem {
     /**
      * constructor for Accounting system object

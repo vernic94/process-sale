@@ -1,5 +1,8 @@
 package se.kth.iv1350.vernic.processSale.integration;
 
+/**
+ * Printer class. Represents the external system
+ */
 public class Printer {
 
     /**

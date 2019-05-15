@@ -1,6 +1,8 @@
 package se.kth.iv1350.vernic.processSale.integration;
 
-
+/**
+ * ItemDTO holds all the information about an item
+ */
 public class ItemDTO {
 
     private double tax;

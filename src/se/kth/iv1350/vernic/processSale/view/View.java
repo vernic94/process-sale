@@ -1,10 +1,15 @@
 package se.kth.iv1350.vernic.processSale.view;
 
 import se.kth.iv1350.vernic.processSale.controller.Controller;
-import se.kth.iv1350.vernic.processSale.integration.ItemDTO;
+import se.kth.iv1350.vernic.processSale.controller.ItemCouldNotBeAddedException;
+import se.kth.iv1350.vernic.processSale.integration.*;
 
 import java.util.Scanner;
 
+/**
+ * Placeholder class instead of true interface.
+ * Contains hard-coded user input simulations in method <code>sampleExecution()</code> that generates system operation calls.
+ */
 public class View {
 
     private Controller contr;
@@ -32,14 +37,28 @@ public class View {
         while (isProcessing) {
             System.out.println("Choose a product and specify its identifier: \n");
             String id = this.in.nextLine();
-            boolean validItemId = contr.checkIfValid(id);
-            if (!validItemId)
-                System.out.println("no such item. Please insert a valid item ID");
-            else {
+            try {
                 ItemDTO itemDTO = this.contr.addItem(id);
                 System.out.println(itemDTO.toString());
-                isProcessing = this.checkIfSalesIsDone();
+            }catch (ItemNotFoundException ex) {
+                System.out.println("Item " + id + " not found. Please insert a valid Identifier.\n" + ex.getMessage());
             }
+            catch(ItemCouldNotBeAddedException ex) {
+                System.out.println("Database failed. Please try again.\n"+ ex.getMessage());
+            }
+
+            isProcessing = this.checkIfSalesIsDone();
+        }
+    }
+
+    private void handlePersonalCode(){
+        System.out.println("Are you a member of this Store? If yes, please enter your personal code, otherwise press enter. ");
+        String personalCode = this.in.nextLine();
+        try{
+            this.contr.setPersonalCode(personalCode);
+            System.out.println("Amount to pay after discount: " + this.contr.getCurrentTotalPrice()+ " SEK\n");
+        }catch (CustomerNotFoundException ex){
+            System.out.println("No such personal code.\n" + ex.getMessage());
         }
     }
 
@@ -56,6 +75,7 @@ public class View {
             boolean isPaymentDone = false;
             while(!isPaymentDone) {
                 System.out.println("Amount to pay: " + this.contr.getCurrentTotalPrice()+ " SEK\n");
+                this.handlePersonalCode();
                 System.out.println("Please insert a valid amount which represents the payment.\n");
                 double amount = this.in.nextDouble();
                 in.nextLine();

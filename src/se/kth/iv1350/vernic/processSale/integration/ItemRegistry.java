@@ -1,5 +1,8 @@
 package se.kth.iv1350.vernic.processSale.integration;
 
+/**
+ * Item registry class, where all the items of the shop are stored
+ */
 public class ItemRegistry {
 
     private ItemDTO[] itemsInRegistry = {
@@ -9,33 +12,22 @@ public class ItemRegistry {
             new ItemDTO(0.20, "1003", "mozzarella", 19.95)};
 
     /**
-     * checks if the item identifier is valid(if it exists in the item registry)
-     * @param itemID the items identifier
-     * @return true if the item exists (if the identifier is valid), false otherwise
-     */
-    public boolean checkIfValid(String itemID){
-        boolean isValid = false;
-        for (int i=0; i < itemsInRegistry.length; i++) {
-            if (this.itemsInRegistry[i].getItemIdentifier().equals(itemID)){
-                isValid = true;
-                break;
-            }
-        }
-        return isValid;
-    }
-
-    /**
      * gets the item from the registry
      * @param itemID the items identifier
-     * @return the item if there is one with that identifier in the registry, null otherwise
+     * @return the item if there is one with that identifier in the registry, otherwise throws an exception
+     * @throws ItemNotFoundException exception thrown if item isn't found in registry
+     * @throws DatabaseFailureException exception thrown if database fails
      */
-    public ItemDTO getItem(String itemID) {
+    public ItemDTO getItem(String itemID) throws ItemNotFoundException, DatabaseFailureException {
+        if(itemID.equals("1000")) {
+            throw new DatabaseFailureException("LOG MESSAGE: Call to database Failed");
+        }
         for (int i=0; i < itemsInRegistry.length; i++) {
             if (this.itemsInRegistry[i].getItemIdentifier().equals(itemID)){
                 return this.itemsInRegistry[i];
             }
         }
-        return null;
+        throw new ItemNotFoundException("LOG MESSAGE: User tried to add item with the invalid identifier: " + itemID);
     }
 
 }

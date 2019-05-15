@@ -9,25 +9,25 @@ import java.util.ArrayList;
  */
 public class Sale {
     private static final double TAX_RATE = 0.2;
-    private double totalPrice;
-    private double tax;
-    private double totalPriceIncTax;
-    private double paidAmount;
-    private double change;
-    private ArrayList<ItemDTO> saleItems;
+    private double totalPrice = 0;
+    private double tax = 0;
+    private double totalPriceIncTax = 0 ;
+    private double paidAmount = 0;
+    private double change = 0;
+    private ArrayList<ItemDTO> saleItems =  new ArrayList<>();
+    private Discounter discounter;
 
     /**
      * Constructor of the class Sale
      */
-    public Sale() {
-        this.totalPrice = 0;
-        this.tax = 0;
-        this.totalPriceIncTax = 0;
-        this.paidAmount = 0;
-        this.change = 0;
-        this.saleItems = new ArrayList<>();
+    public Sale(Discounter discounter) {
+        this.discounter = discounter;
     }
 
+    /**
+     * Empty constructor of the class Sale
+     */
+    public Sale()  {}
 
     private void updateTax(){
         this.tax = totalPrice * TAX_RATE;
@@ -60,7 +60,20 @@ public class Sale {
     public boolean concludeSale(double paidAmount){
         this.paidAmount = paidAmount;
         this.calculateChange();
-        return  this.change >= 0;
+        if (this.change >= 0){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * apply discount on the sale
+     */
+    public void applyDiscount() {
+        if(this.discounter != null) {
+            this.totalPrice = discounter.calculateDiscount(totalPrice);
+            this.updateTax();
+        }
     }
 
     /**
@@ -107,8 +120,14 @@ public class Sale {
      * gets all items in the ongoing sale
      * @return the items of the sale
      */
-
     public ArrayList<ItemDTO> getSaleItems() {
         return saleItems;
+    }
+
+    /**
+     * sets discounter object strategy
+     */
+    public void setDiscounter(Discounter discounter) {
+        this.discounter = discounter;
     }
 }

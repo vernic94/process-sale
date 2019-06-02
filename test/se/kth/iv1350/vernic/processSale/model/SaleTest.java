@@ -43,4 +43,6 @@ public class SaleTest {
         assertEquals(resultGreater,true);
         assertEquals(sale.getChange(), paidAmountGreater - sale.getTotalPriceIncTax(), 0);
     }
+
+
 }
